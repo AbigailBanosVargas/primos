@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5000 Primeros Números Primos</title>
+<style>
+  body { font-family: monospace; margin: 20px; background: #1e1e2e; color: #cdd6f4; }
+  h1 { text-align: center; color: #89b4fa; }
+  .info { text-align: center; margin-bottom: 20px; color: #a6adc8; }
+  .container { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+  .prime { padding: 4px 8px; background: #313244; border-radius: 4px; font-size: 14px; }
+  .prime:hover { background: #45475a; }
+</style>
+</head>
+<body>
+<h1>5000 Primeros Números Primos</h1>
+<div class="info" id="info"></div>
+<div class="container" id="primes"></div>
+<script>
+  function isPrime(n) {
+    if (n < 2) return false;
+    if (n === 2) return true;
+    if (n % 2 === 0) return false;
+    for (let i = 3; i * i <= n; i += 2) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+  const limit = 5000;
+  const primes = [];
+  let num = 2;
+  while (primes.length < limit) {
+    if (isPrime(num)) primes.push(num);
+    num++;
+  }
+
+  document.getElementById('info').textContent =
+    `Mostrando los primeros ${primes.length} números primos (último: ${primes[primes.length - 1]})`;
+  document.getElementById('primes').innerHTML =
+    primes.map(p => `<span class="prime">${p}</span>`).join('');
+</script>
+</body>
+</html>
